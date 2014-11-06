@@ -18,7 +18,7 @@ def hack_RSA(e,n):
         
         #check if d is actually the key
         if k!=0 and (e*d-1)%k == 0:
-            phi = (e*d+1)//k
+            phi = (e*d-1)//k
             s = n - phi + 1
             # check if the equation x^2 - s*x + n = 0
             # has integer roots
