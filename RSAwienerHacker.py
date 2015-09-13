@@ -4,7 +4,7 @@ Created on Dec 14, 2011
 @author: pablocelayes
 '''
 
-import ContinuedFractions, Arithmetic, RSAvulnerableKeyGenerator
+import ContinuedFractions, Arithmetic, RSAvulnerableKeyGenerator, decryptor
 
 def hack_RSA(e,n):
     '''
@@ -27,29 +27,30 @@ def hack_RSA(e,n):
                 t = Arithmetic.is_perfect_square(discr)
                 if t!=-1 and (s+t)%2==0:
                     print("Hacked!")
+                    print "-------------------------"
                     return d
 
 # TEST functions
 
 def test_hack_RSA():
     print("Testing Wiener Attack")
-    times = 5
     
-    while(times>0):
-        e,n,d = RSAvulnerableKeyGenerator.generateKeys(1024)
-        print("(e,n) is (", e, ", ", n, ")")
-        print("d = ", d)
+    with open('2.2_public_key.hex') as pub:
+        e = int(pub.read(), 16)
+    pub.close()
+    with open('2.2_modulo.hex') as mod:
+        n = int(mod.read(), 16)
+    mod.close()
+
+    print "(e,n) is (", e, ", ", n, ")"
+    print "d = ?" 
+
+    hacked_d = hack_RSA(e, n)
+    msg = decryptor.decrypt(hacked_d)
+    print "The message:\n"+str(msg)+"\n"
     
-        hacked_d = hack_RSA(e, n)
-    
-        if d == hacked_d:
-            print("Hack WORKED!")
-        else:
-            print("Hack FAILED")
-        
-        print("d = ", d, ", hacked_d = ", hacked_d)
-        print("-------------------------")
-        times -= 1
+    print "hacked_d = ", hacked_d 
+    print "-------------------------"
     
 if __name__ == "__main__":
     #test_is_perfect_square()
