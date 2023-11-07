@@ -11,8 +11,7 @@ def hack_RSA(e,n):
     Finds d knowing (e,n)
     applying the Wiener continued fraction attack
     '''
-    frac = ContinuedFractions.rational_to_contfrac(e, n)
-    convergents = ContinuedFractions.convergents_from_contfrac(frac)
+    _, convergents = ContinuedFractions.rational_to_contfrac(e, n)
     
     for (k,d) in convergents:
         
