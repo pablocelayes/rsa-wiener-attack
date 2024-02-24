@@ -93,19 +93,3 @@ def is_perfect_square(n):
             return -1
     
     return -1
-
-#TEST functions
-
-def test_is_perfect_square():
-    print("Testing is_perfect_square")
-    testsuit = [4, 0, 15, 25, 18, 901, 1000, 1024]
-    
-    for n in testsuit:
-        print("Is ", n, " a perfect square?")
-        if is_perfect_square(n)!= -1:
-            print("Yes!")
-        else:
-            print("Nope")
-
-if __name__ == "__main__":
-    test_is_perfect_square()
